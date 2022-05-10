@@ -9,6 +9,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Question3aConsume.Model;
+using Microsoft.EntityFrameworkCore;
 
 namespace Question3aConsume
 {
@@ -26,6 +28,9 @@ namespace Question3aConsume
         {
 
             services.AddControllers();
+            services.AddHostedService<ConsumerRabbitMQ>();
+            services.AddDbContext<taskItemContext>(opt =>
+                                               opt.UseInMemoryDatabase("TaskList"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
